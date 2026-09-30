@@ -1,0 +1,97 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: faultlab
+      POSTGRES_USER: faultlab
+      POSTGRES_PASSWORD: faultlab
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U faultlab"]
+      interval: 3s
+      retries: 20
+    networks: [control]
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      retries: 20
+    networks: [control]
+    restart: unless-stopped
+  migrate:
+    build: .
+    command: ["alembic", "upgrade", "head"]
+    environment: &backend_env
+      DATABASE_URL: postgresql+psycopg://faultlab:faultlab@postgres:5432/faultlab
+      REDIS_URL: redis://redis:6379/0
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:-local-development-only}
+      DEMO_GATEWAY_URL: http://gateway:8001
+      DEMO_PAYMENT_URL: http://payment:8003
+    depends_on:
+      postgres: {condition: service_healthy}
+    networks: [control, demo]
+  backend:
+    build: .
+    command: ["uvicorn", "faultlab.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment: *backend_env
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready')"]
+      interval: 5s
+      retries: 10
+    networks: [control, demo]
+    restart: unless-stopped
+  worker:
+    build: .
+    command: ["python", "-m", "faultlab.worker"]
+    environment: *backend_env
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      gateway: {condition: service_healthy}
+    networks: [control, demo]
+    restart: unless-stopped
+  gateway:
+    build: .
+    command: ["uvicorn", "demo.gateway:app", "--host", "0.0.0.0", "--port", "8001"]
+    environment: {ORDER_URL: "http://order:8002"}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/ready')"]
+      interval: 5s
+      retries: 10
+    networks: [demo]
+    restart: unless-stopped
+  order:
+    build: .
+    command: ["uvicorn", "demo.order:app", "--host", "0.0.0.0", "--port", "8002"]
+    environment: {PAYMENT_URL: "http://payment:8003"}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8002/ready')"]
+      interval: 5s
+      retries: 10
+    networks: [demo]
+    restart: unless-stopped
+  payment:
+    build: .
+    command: ["uvicorn", "demo.payment:app", "--host", "0.0.0.0", "--port", "8003"]
+    environment: {INTERNAL_TOKEN: "${INTERNAL_TOKEN:-local-development-only}"}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8003/ready')"]
+      interval: 5s
+      retries: 10
+    networks: [demo]
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on:
+      backend: {condition: service_healthy}
+    networks: [control]
+    restart: unless-stopped
+networks:
+  control: {}
+  demo: {internal: true}
+volumes:
+  pgdata: {}
