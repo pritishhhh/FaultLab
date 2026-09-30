@@ -14,4 +14,13 @@ def test_score_zero_baseline_errors_and_recovery():
 
 def test_empty_recovery_is_failure():
     empty = {"requests": 0, "p95_ms": 0, "error_rate": 0, "rps": 0}
-    assert score(empty, empty, empty)["recovered"] is False
+    result = score(empty, empty, empty)
+    assert result["recovered"] is False
+    assert result["score"] == 0
+
+
+def test_all_requests_fail_does_not_score_as_recovered():
+    failed = {"requests": 10, "p95_ms": 100, "error_rate": 1, "rps": 1}
+    result = score(failed, failed, failed)
+    assert result["score"] == 0
+    assert result["recovered"] is False

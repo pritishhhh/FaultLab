@@ -8,15 +8,18 @@ def score(baseline: dict, fault: dict, recovery: dict) -> dict:
     baseline_errors = float(baseline.get("error_rate", 0))
     fault_errors = float(fault.get("error_rate", 0))
     recovery_errors = float(recovery.get("error_rate", 0))
-    recovered = (recovery.get("requests", 0) > 0
+    baseline_healthy = baseline.get("requests", 0) > 0 and baseline_errors <= .1
+    recovered = (baseline_healthy and recovery.get("requests", 0) > 0
                  and recovery_p95 <= max(1.5 * baseline_p95, baseline_p95 + 30)
-                 and recovery_errors <= max(baseline_errors + .05, .05))
+                 and recovery_errors <= min(max(baseline_errors + .05, .05), .1))
     availability = max(0.0, 1 - fault_errors)
     latency = min(1.0, baseline_p95 / max(fault_p95, baseline_p95))
-    error = max(0.0, 1 - max(0.0, fault_errors - baseline_errors))
+    error = max(0.0, 1 - fault_errors)
     recovery_component = 1.0 if recovered else 0.0
     total = round(100 * (.35 * availability + .20 * latency + .20 * error
                          + .25 * recovery_component))
+    if not baseline_healthy:
+        total = 0
     classifications = []
     if fault_p95 > 1.5 * baseline_p95:
         classifications.append("LATENCY_DEGRADATION")

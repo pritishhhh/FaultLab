@@ -91,7 +91,13 @@ CI runs backend checks, tests (including a real-process lifecycle test), a SQLit
 python docs/benchmarks/run.py --base-url http://localhost:8080 --service-id SERVICE_ID --output docs/benchmarks/results/local.json
 ```
 
-No measured numbers are committed. Results depend on the host and date.
+Without Docker, run a disposable loopback stack and record the same scenarios:
+
+```bash
+python docs/benchmarks/run_local.py --output docs/benchmarks/results/local.json --window-seconds 10 --rps 2
+```
+
+The measured Windows loopback run is in `docs/benchmarks/results/local-validated-2026-10-01.json`, with a summary and caveats in `docs/benchmarks/README.md`. Results depend on the host and date and are not expected-performance targets.
 
 ## AWS and Terraform
 
@@ -116,4 +122,4 @@ See `docs/adr/` and `docs/architecture.md`. PostgreSQL holds state and events; t
 - Redis is provisioned but unused in the runtime path, so Redis reconnection behavior has not been validated.
 - There is no authentication for the UI/API; bind the console only to a trusted local development environment.
 - A database-backed active-service lock is needed before scaling workers or accepting concurrent starts from several API instances.
-- Broad failure integration tests, screenshots/GIF, cloud deployment, and verified benchmarks remain outstanding.
+- Broad failure integration tests, screenshots/GIF, cloud deployment, and stable-host capacity benchmarks remain outstanding.

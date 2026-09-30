@@ -1,0 +1,471 @@
+{
+  "measured_at_epoch": 1790806837.8370237,
+  "host": "Windows-11-10.0.26200-SP0",
+  "window_seconds": 10,
+  "configured_rps": 2,
+  "scenarios": {
+    "latency_100": {
+      "experiment_id": "79b5f72c-b0f8-4561-9de2-c9833680da42",
+      "phase": "COMPLETED",
+      "error": null,
+      "report": {
+        "score": 100,
+        "recovered": true,
+        "latency_amplification": 0.72,
+        "error_amplification": null,
+        "classifications": [],
+        "phases": {
+          "BASELINE": {
+            "requests": 18,
+            "successes": 18,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 18
+            },
+            "rps": 1.77,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1000.0,
+            "p95_ms": 1240.5,
+            "p99_ms": 1410.5
+          },
+          "FAULT_INJECTION": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.966,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 766.0,
+            "p95_ms": 893.3,
+            "p99_ms": 928.26
+          },
+          "RECOVERY": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.997,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 734.0,
+            "p95_ms": 781.8,
+            "p99_ms": 793.96
+          }
+        }
+      }
+    },
+    "latency_300": {
+      "experiment_id": "a5ab27c8-3745-42f5-aa6c-ec26e348e170",
+      "phase": "COMPLETED",
+      "error": null,
+      "report": {
+        "score": 92,
+        "recovered": true,
+        "latency_amplification": 1.736,
+        "error_amplification": null,
+        "classifications": [
+          "LATENCY_DEGRADATION"
+        ],
+        "phases": {
+          "BASELINE": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.991,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 750.0,
+            "p95_ms": 800.9,
+            "p99_ms": 860.18
+          },
+          "FAULT_INJECTION": {
+            "requests": 16,
+            "successes": 16,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 16
+            },
+            "rps": 1.434,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1328.0,
+            "p95_ms": 1390.75,
+            "p99_ms": 1428.55
+          },
+          "RECOVERY": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.997,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 750.0,
+            "p95_ms": 768.35,
+            "p99_ms": 804.07
+          }
+        }
+      }
+    },
+    "latency_500": {
+      "experiment_id": "b6b10abf-d331-4a3f-aeaf-844d7dbc7ab5",
+      "phase": "COMPLETED",
+      "error": null,
+      "report": {
+        "score": 94,
+        "recovered": true,
+        "latency_amplification": 1.439,
+        "error_amplification": null,
+        "classifications": [],
+        "phases": {
+          "BASELINE": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.994,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 750.0,
+            "p95_ms": 797.8,
+            "p99_ms": 809.96
+          },
+          "FAULT_INJECTION": {
+            "requests": 19,
+            "successes": 19,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 19
+            },
+            "rps": 1.745,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1031.0,
+            "p95_ms": 1148.4,
+            "p99_ms": 1316.88
+          },
+          "RECOVERY": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.885,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1007.5,
+            "p95_ms": 1047.75,
+            "p99_ms": 1059.15
+          }
+        }
+      }
+    },
+    "errors_5pct": {
+      "experiment_id": "21f1e25a-8bbc-463a-a125-efa743b60471",
+      "phase": "COMPLETED",
+      "error": null,
+      "report": {
+        "score": 97,
+        "recovered": true,
+        "latency_amplification": 0.946,
+        "error_amplification": null,
+        "classifications": [],
+        "phases": {
+          "BASELINE": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.972,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 789.0,
+            "p95_ms": 859.8,
+            "p99_ms": 871.96
+          },
+          "FAULT_INJECTION": {
+            "requests": 20,
+            "successes": 19,
+            "failures": 1,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 19,
+              "503": 1
+            },
+            "rps": 1.988,
+            "success_rate": 0.95,
+            "error_rate": 0.05,
+            "timeout_rate": 0.0,
+            "p50_ms": 773.5,
+            "p95_ms": 813.6,
+            "p99_ms": 837.92
+          },
+          "RECOVERY": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.994,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 766.0,
+            "p95_ms": 797.8,
+            "p99_ms": 809.96
+          }
+        }
+      }
+    },
+    "errors_10pct": {
+      "experiment_id": "4525b77d-9059-4255-bdb8-52c310cd00fe",
+      "phase": "COMPLETED",
+      "error": null,
+      "report": {
+        "score": 96,
+        "recovered": true,
+        "latency_amplification": 1.07,
+        "error_amplification": null,
+        "classifications": [
+          "ERROR_AMPLIFICATION"
+        ],
+        "phases": {
+          "BASELINE": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.818,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1039.0,
+            "p95_ms": 1156.0,
+            "p99_ms": 1156.0
+          },
+          "FAULT_INJECTION": {
+            "requests": 18,
+            "successes": 17,
+            "failures": 1,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 17,
+              "503": 1
+            },
+            "rps": 1.665,
+            "success_rate": 0.9444,
+            "error_rate": 0.0556,
+            "timeout_rate": 0.0,
+            "p50_ms": 1179.5,
+            "p95_ms": 1236.4,
+            "p99_ms": 1247.28
+          },
+          "RECOVERY": {
+            "requests": 18,
+            "successes": 18,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 18
+            },
+            "rps": 1.778,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1063.0,
+            "p95_ms": 1235.0,
+            "p99_ms": 1235.0
+          }
+        }
+      }
+    },
+    "dependency_outage": {
+      "experiment_id": "d1c3bd9b-e48e-4e22-9a57-2c7d75077511",
+      "phase": "COMPLETED",
+      "error": null,
+      "report": {
+        "score": 45,
+        "recovered": true,
+        "latency_amplification": 0.985,
+        "error_amplification": null,
+        "classifications": [
+          "ERROR_AMPLIFICATION"
+        ],
+        "phases": {
+          "BASELINE": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.823,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1054.5,
+            "p95_ms": 1078.0,
+            "p99_ms": 1078.0
+          },
+          "FAULT_INJECTION": {
+            "requests": 20,
+            "successes": 0,
+            "failures": 20,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "503": 20
+            },
+            "rps": 1.85,
+            "success_rate": 0.0,
+            "error_rate": 1.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1039.5,
+            "p95_ms": 1062.05,
+            "p99_ms": 1062.81
+          },
+          "RECOVERY": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.863,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1031.0,
+            "p95_ms": 1047.75,
+            "p99_ms": 1059.15
+          }
+        }
+      }
+    },
+    "cpu_pressure": {
+      "experiment_id": "f4821ebe-96b9-46d1-8c9d-912ec19f5b6b",
+      "phase": "COMPLETED",
+      "error": null,
+      "report": {
+        "score": 97,
+        "recovered": true,
+        "latency_amplification": 1.191,
+        "error_amplification": null,
+        "classifications": [],
+        "phases": {
+          "BASELINE": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.839,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 1039.0,
+            "p95_ms": 1094.0,
+            "p99_ms": 1094.0
+          },
+          "FAULT_INJECTION": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.919,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 961.0,
+            "p95_ms": 1303.25,
+            "p99_ms": 1398.25
+          },
+          "RECOVERY": {
+            "requests": 20,
+            "successes": 20,
+            "failures": 0,
+            "timeouts": 0,
+            "connection_errors": 0,
+            "statuses": {
+              "200": 20
+            },
+            "rps": 1.975,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "p50_ms": 812.0,
+            "p95_ms": 892.55,
+            "p99_ms": 916.11
+          }
+        }
+      }
+    }
+  }
+}

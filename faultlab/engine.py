@@ -92,6 +92,8 @@ async def execute(experiment_id: str, owner: str) -> None:
                                     Phase.FAULT_INJECTION: "fault.completed",
                                     Phase.RECOVERY: "recovery.completed"}[phase], result)
                 db.commit()
+            if phase == Phase.BASELINE and (result["requests"] == 0 or result["success_rate"] < .9):
+                raise RuntimeError("Baseline unhealthy: fewer than 90% of requests succeeded")
             if cancelled(experiment_id):
                 raise asyncio.CancelledError()
         with SessionFactory() as db:
