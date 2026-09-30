@@ -10,6 +10,7 @@ node_modules/
 dist/
 *.tsbuildinfo
 *.tfstate*
+*.tfplan
 .terraform/
 *.tfvars
 *.db

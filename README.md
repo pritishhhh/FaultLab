@@ -2,7 +2,7 @@
 
 FaultLab is a controlled resilience-testing platform for a three-service demo path: **gateway → order → payment**. It sends bounded traffic, changes only the managed payment service, measures baseline/fault/recovery windows, and stores an auditable experiment history. The React console shows live state, metrics, and a deterministic report.
 
-> **Current status:** This is a working local prototype verified with a real-process HTTP lifecycle test. Docker, Terraform, and AWS were unavailable in the authoring environment, so container and cloud deployment remain unverified. See [Known limitations](#known-limitations).
+> **Current status:** This is a working local prototype verified with a real-process HTTP lifecycle test. Terraform was statically validated; Docker and AWS deployment remain unverified. See [Known limitations](#known-limitations).
 
 ## Why it exists
 
@@ -25,7 +25,7 @@ PostgreSQL is authoritative. WebSockets poll persisted state and can reconnect w
 
 ## Stack
 
-Python 3.12, FastAPI, Pydantic, SQLAlchemy, Alembic, PostgreSQL, Redis, React, TypeScript, React Router, TanStack Query, Recharts, Docker Compose, GitHub Actions. The supplied Terraform is a starting point for AWS infrastructure planning; it is not yet an executable production deployment.
+Python 3.12, FastAPI, Pydantic, SQLAlchemy, Alembic, PostgreSQL, Redis, React, TypeScript, React Router, TanStack Query, Recharts, Docker Compose, GitHub Actions, and Terraform.
 
 ## Lifecycle
 
@@ -95,7 +95,7 @@ No measured numbers are committed. Results depend on the host and date.
 
 ## AWS and Terraform
 
-`docs/aws.md` describes the intended ECS/Fargate, ECR, RDS, Redis, ALB, CloudWatch, IAM, and secret layout. AWS deployment and Terraform apply were **not performed**. The repository does not yet include an apply-ready Terraform stack or release workflow. Do not represent this as deployed infrastructure.
+`infrastructure/terraform/` defines the ECS/Fargate, ECR, RDS, Redis, ALB, CloudWatch, IAM, network, and secret layout. `terraform fmt` and `terraform validate` passed locally. AWS plan/apply were **not performed**. See `docs/aws.md` for exact init, plan, apply, image push, and destroy commands. Do not represent this as deployed infrastructure.
 
 ## Safety boundaries
 
@@ -116,4 +116,4 @@ See `docs/adr/` and `docs/architecture.md`. PostgreSQL holds state and events; t
 - Redis is provisioned but unused in the runtime path, so Redis reconnection behavior has not been validated.
 - There is no authentication for the UI/API; bind the console only to a trusted local development environment.
 - A database-backed active-service lock is needed before scaling workers or accepting concurrent starts from several API instances.
-- Frontend tests, broad integration tests, screenshots/GIF, cloud deployment, and verified benchmarks remain outstanding.
+- Broad failure integration tests, screenshots/GIF, cloud deployment, and verified benchmarks remain outstanding.

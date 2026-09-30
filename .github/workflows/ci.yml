@@ -26,3 +26,13 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
+  terraform:
+    runs-on: ubuntu-latest
+    defaults: {run: {working-directory: infrastructure/terraform}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: {terraform_version: '1.16.4'}
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend=false -input=false
+      - run: terraform validate
